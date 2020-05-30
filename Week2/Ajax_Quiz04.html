@@ -22,7 +22,7 @@
                 url: url_to,
                 data: {},
                 success: function (response) {
-                    console.log(response)
+                   $('exchange_rate').value(response[1],['rate'])
                 }
             })
         }
