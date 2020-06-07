@@ -19,4 +19,4 @@ for music in music_data:
     singer = music.select_one('td.info > a.artist.ellipsis').text
     singer = singer.strip()
 
-    print(rank,"-",title,"-",singer)
+    print(rank," : ",title,"-",singer)
