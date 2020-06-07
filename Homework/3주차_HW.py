@@ -13,11 +13,10 @@ soup = BeautifulSoup(data.text, 'html.parser')
 music_data = soup.select('#body-content > div.newest-list > div > table > tbody > tr')
 
 for music in music_data:
-    rank = music.select_one('td.number').text
-    rank = rank.strip()
+    rank = music.select_one('td.number').text.split(' ')[0].strip()
     title = music.select_one('td.info > a.title.ellipsis').text
     title = title.strip()
     singer = music.select_one('td.info > a.artist.ellipsis').text
     singer = singer.strip()
 
-    print(rank,title,singer)
+    print(rank,"-",title,"-",singer)
