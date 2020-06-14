@@ -1,21 +1,37 @@
-from flask import Flask, render_template, request, jsonify
-app = Flask(__name__) #flaks를 사용하겠다는 말
+from flask import Flask, render_template, jsonify, request
+app = Flask(__name__)
 
-@app.route('/') #5000 뒤에 붙는것
+from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
+client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
+db = client.dbsparta                      # 'dbsparta'라는 이름의 db를 만듭니다.
+
+## HTML을 주는 부분
+@app.route('/')
 def home():
-   return render_template('index.html')
+    return render_template('index.html')
 
-@app.route('/test', methods=['POST'])
-def test_post():
-   title_receive = request.form['title_give']
-   print(title_receive)
-   return jsonify({'result':'success', 'msg': '이 요청은 POST!'})
+## API 역할을 하는 부분
+@app.route('/hey', methods=['POST'])
+def order_receive():
+   name_receive = request.form['name_give']
+   qty_receive = request.form['qty_give']
+   address_receive = request.form['address_give'] 
+   telephone_receive = request.form['telephone_give']  
 
-@app.route('/test', methods=['GET'])
-def test_get():
-   title_receive = request.args.get('title_give')
-   print(title_receive)
-   return jsonify({'result':'success', 'msg': '이 요청은 GET!'})
+   doc = {
+      'name':name_receive,
+      'qty':qty_receive,
+      'address':address_receive,
+      'telephone':telephone_receive
+   }
+   db.cookieorder.insert_one(doc)
 
-if __name__ == '__main__':  
-   app.run('0.0.0.0',port=5000,debug=True) #flaks를 돌려주는 친구 - 계속 돌아감 ip
+   return jsonify({'result':'success', 'msg': '주문이 완료 되었습니다.'})
+  
+
+@app.route('/list', methods=['GET'])
+def order_list():
+    return jsonify({'result':'success', 'msg': '잘연결되었음'})
+
+if __name__ == '__main__':
+    app.run('0.0.0.0', port=5000, debug=True)

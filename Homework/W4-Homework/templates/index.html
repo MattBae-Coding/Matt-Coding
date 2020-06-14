@@ -15,14 +15,14 @@
 <style>
     .wrap {
         margin: auto;
-        width: 500px;
+        width: 400px;
         font-family: 'East Sea Dokdo', cursive;
         font-family: 'Oswald', sans-serif;
     }
 
     .product_img {
         width: 600px;
-        height: 400px;
+        height: 500px;
         background-image: url();
 
         background-size: cover;
@@ -54,6 +54,7 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+
     $(document).ready(function () {
         $.ajax({
             type: "GET",
@@ -62,46 +63,60 @@
             success: function (response) {
                 let result = response[1]["rate"];
                 let ex_html = `<li>달러-원 환율:${result}</li>`
-                $('#exchange_rate').append(ex_html);
+                $('#exchange_rate').append(ex_html)
             }
         })
-    });
+    });        
 
     function hey() {
 
         let name = $('#name').val();
+        let qty = $('#qty').val();
+        let address = $('#address').val();
+        let telephone = $('#telephone').val();
+
+        
         if (name == "") {
             alert('이름을 입력하세요!');
             return;
-        }
-
-        let qty = $('#qty').val();
-        if (qty == "수량을 선택하세요") {
+        }   else if (qty == "수량을 선택하세요") {
             alert('수량을 입력하세요!');
             return;
-        }
-
-        let address = $('#address').val();
-        if (address == "") {
+        }   else if (address == "") {
             alert('주소을 입력하세요!');
             return;
         }
-
-        let telephone = $('#telephone').val();
         var inputtedPhoneNumber = $("#telephone").val();
         var phoneNumberRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
         if (!phoneNumberRegex.test(inputtedPhoneNumber)) {
             alert("핸드폰 번호를 입력해주세요");
             return;
-
         }
+        
+        $.ajax({
+            type: "POST",
+            url: "/hey",
+            data: {name_give:name,qty_give:qty,address_give:address,telephone_give:telephone},
+            success: function (response) {
+                if (response['result'] == 'success'){
+                    alert(response['msg']);}            
+        }})
     }
+    function listing() {
+    $.ajax({
+    type: "GET",
+    url: "/list",
+    data: {},
+    success: function(response){
+       console.log(response)
+    }
+  })
 </script>
 
 <body>
     <div class="wrap">
         <div class="product_img">
-            <img src="{{ url_for('static', filename='cookie.jpg') }}"/ width="500px">
+            <img src="{{ url_for('static', filename='cookie.jpg') }}" / width="500px">
         </div>
         <span class="main_title">
             쿠키를 팝니다.
