@@ -77,7 +77,20 @@
                 data: {},
                 success: function (response) {
                     if (response['result'] == 'success') {
-                        alert(response['msg']);
+                        
+                        let reviews = response['all_review']
+                        for (let i = 0; i < reviews.length; i++) {
+                            let title = reviews[i]['title']
+                            let author = reviews[i]['author']
+                            let review = reviews[i]['review'] 
+
+                            let temp_html = `<tr>
+                                                <td>${title}</td>
+                                                <td>${author}</td>
+                                                <td>${review}</td>
+                                             </tr>`
+                            $('#orders-box').append(temp_html)
+                        }
                         // 2. 성공했을 때 리뷰를 올바르게 화면에 나타내기
                     } else {
                         alert('리뷰를 받아오지 못했습니다');
