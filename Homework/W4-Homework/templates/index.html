@@ -114,11 +114,14 @@
                 let qty = result_order[i]['qty']
                 let address = result_order[i]['address']
                 let telephone = result_order[i]['telephone']
-
-                let temp_html = `${name}:${qty}:${address}:${telephone}`
-                $('#button').append(temp_html)
-               
-            
+                let temp_html = `<tr>
+                                <td>${name}</td>
+                                <td>${qty}</td>
+                                <td>${address}</td>
+                                <td>${telephone}</td>
+                            </tr>`;
+                $('#orders-box').append(temp_html)
+                          
             }
         }
   })}
@@ -177,10 +180,21 @@
             <input id="telephone" type="text" class="form-control" aria-label="Default"
                 aria-describedby="inputGroup-sizing-default">
         </div>
-
         <div class="button" onclick="hey()">
             <button type="button" class="btn btn-primary">주문하기</button>
         </div>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">이름</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">주소</th>
+                    <th scope="col">전화번호</th>
+                </tr>
+            </thead>
+            <tbody id="orders-box"></tbody>
+        </table>
     </div>
 
 
