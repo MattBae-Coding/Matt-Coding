@@ -60,9 +60,10 @@
                 let result = response[1]["rate"];
                 let ex_html = `<li>달러-원 환율:${result}</li>`
                 $('#exchange_rate').append(ex_html)
+                listing();
             }
         })
-        listing();
+        
     })
 
     function hey() {
@@ -99,13 +100,27 @@
                     alert(response['msg']);}            
         }})
     }
+
     function listing() {
     $.ajax({
     type: "GET",
     url: "/list",
     data: {},
     success: function(response){
-          }
+        if (response['result'] == 'success')
+            let = result_order = (response['all_orders'])
+            for (let i = 0; i < result_order.length; i++){
+                let name = result_order[i]['name']
+                let qty = result_order[i]['qty']
+                let address = result_order[i]['address']
+                let telephone = result_order[i]['telephone']
+
+                let temp_html = `${name}:${qty}:${address}:${telephone}`
+                $('#button').append(temp_html)
+               
+            
+            }
+        }
   })}
 </script>
 
@@ -166,7 +181,6 @@
         <div class="button" onclick="hey()">
             <button type="button" class="btn btn-primary">주문하기</button>
         </div>
-
     </div>
 
 

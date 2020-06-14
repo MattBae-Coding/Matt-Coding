@@ -31,7 +31,9 @@ def order_receive():
 
 @app.route('/list', methods=['GET'])
 def order_list():
-    return jsonify({'result':'success', 'msg': '잘연결되었음'})
+    lists = list(db.cookieorder.find({},{'_id':0}))
+
+    return jsonify({'result':'success', 'all_orders':lists})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
