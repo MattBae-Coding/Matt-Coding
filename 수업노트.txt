@@ -1,2 +1,37 @@
 ALT+B: 브라우저로 보기
 alt+shift+f: 자동 줄맞춤
+
+
+W4
+모두의 책 리뷰
+- 프로젝트 세팅
+install flask pymongo
+
+서버돌리면 html 나옴
+
+1. DB 저장
+2. 로딩 후 DB 에서 받아서 붙이기
+
+클라이언트 서버 연결 확인
+
+서버 완성
+name_receice = request.form['name_give']
+doc 만들고
+db에 저장
+
+
+
+클라이언트에서 값 가져오기
+let title = $('#title').val();
+
+  $.ajax({
+                type: 'POST', // 타입을 작성합니다.
+                url: '/reviews', // url을 작성합니다.
+                data: {title_give:title,author_give:author,review_give:review}, // data를 작성합니다. },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert(response['msg']);
+                        window.location.reload();
+                    }
+                }
+            });
