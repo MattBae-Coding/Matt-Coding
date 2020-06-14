@@ -97,7 +97,8 @@
             data: {name_give:name,qty_give:qty,address_give:address,telephone_give:telephone},
             success: function (response) {
                 if (response['result'] == 'success'){
-                    alert(response['msg']);}            
+                    alert(response['msg']);};  
+                    window.location.reload();          
         }})
     }
 
