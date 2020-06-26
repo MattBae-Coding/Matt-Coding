@@ -11,9 +11,10 @@
 
 </head>
 <style>
+ 
     .wrap {
         margin: auto;
-        width: 500px;
+        width: 300px;
     }
 
     .img {
@@ -22,28 +23,49 @@
 
     .input-group-prepend {
         margin-top: 30px;
-        width: 450px;
+        width: 300px;
     }
 
-    .btn-outline-success {
-        margin-left: 150px;
-        width:150px;
-          }
+    .btn {
+        margin-top: 10px;
+        width: 280px;
+    }
 </style>
 
 <body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
+    <script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
+
     <div class="wrap">
         <div class="img">
-            <img src="{{ url_for('static', filename='main.jpg') }}" />
+            <img src="{{ url_for('static', filename='logo.png') }}" / width="300" , height="300">
         </div>
         <div class="input-group-prepend">
             <span class="input-group-text" id="">우리 아이 이름</span>
             <input type="text" class="form-control">
         </div>
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">우리 아이 태어난날</span>
+            <input type="text" id="datePicker" class="form-control" value="">
+        </div>
         <div class="btn">
             <button type="button" class="btn btn-outline-success">Success</button>
         </div>
     </div>
+
+    <script>
+        $('#datePicker').datepicker({
+            format: "yyyy-mm-dd",
+            startDate: '-10d',
+            language: "ko"
+
+        })
+
+    </script>
+
 </body>
 
 </html>
