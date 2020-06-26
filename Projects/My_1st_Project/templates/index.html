@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<style>
+    .wrap {
+        margin: auto;
+        width: 500px;
+    }
+
+    .img {
+        margin-top: 20px;
+    }
+
+    .input-group-prepend {
+        margin-top: 30px;
+        width: 450px;
+    }
+
+    .btn-outline-success {
+        margin-left: 150px;
+        width:150px;
+          }
+</style>
+
+<body>
+    <div class="wrap">
+        <div class="img">
+            <img src="{{ url_for('static', filename='main.jpg') }}" />
+        </div>
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">우리 아이 이름</span>
+            <input type="text" class="form-control">
+        </div>
+        <div class="btn">
+            <button type="button" class="btn btn-outline-success">Success</button>
+        </div>
+    </div>
+</body>
+
+</html>
