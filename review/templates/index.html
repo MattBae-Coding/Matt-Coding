@@ -27,14 +27,39 @@
     <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
 
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#orders-box").empty();
+            $.ajax({
+                type: "GET",
+                url: "/reviews",
+                success: function (response) {
+                    let reviews = response['reviews'];
+                    for (let i=0; i< reviews.length; i++) {
+                        let r = reviews[i];
+                        let title = r['title'];
+                        let author = r['author'];
+                        let review = r['review'];
+
+                        let temp_html = `<tr>
+                                        <td>${title}</td>
+                                        <td>${author}</td>
+                                        <td>${review}</td>
+                                          </tr>`;
+                        $("#orders-box").append(temp_html);
+                    }  
+                }
+            });
+
+        });
+
         function make_review() {
-            let title = $('title').val();
-            let author = $('author').val();
-            let review = $('review').val();
+            let title = $('#title').val();
+            let author = $('#author').val();
+            let review = $('#review').val();
             let data = {
-                'title_give':title,
-                'author_give':author,
-                'review_give':review,
+                'title_give': title,
+                'author_give': author,
+                'review_give': review,
             };
 
             $.ajax({
@@ -42,11 +67,18 @@
                 url: "/reviews",
                 data: data,
                 success: function (response) {
-                    
+                    if (response['result'] == 'success') {
+                        alert(response['msg']);
+                        window.location.reload();
+
+                    }
+
                 }
-            });
-        }
+            })
+        };
+
     </script>
+
 
     <style type="text/css">
         * {
@@ -117,6 +149,7 @@
                 <textarea class="form-control" aria-describedby="basic-addon3" name="bookReview" id="review" cols="30"
                     rows="5" placeholder="140자까지 입력할 수 있습니다." onkeyup="is_long(this)"></textarea>
             </div>
+
             <div class="order">
                 <button onclick="make_review()" type="button" class="btn btn-primary">리뷰 작성하기</button>
             </div>
