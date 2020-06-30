@@ -14,7 +14,8 @@
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-        <script>    var date = new Date();
+        <script>  
+            var date = new Date();
             var year = date.getFullYear();
             var month = date.getMonth()+1
             var day = date.getDate();
@@ -25,9 +26,14 @@
                 day = "0"+day;
             }
             var today = year+""+month+""+day;
-        
-        
         </script>
+        <script>
+            DAY_MSECONDS = 1000 * 60 * 60 * 24; // m-seconds in a day 
+            var d1_ms = BOD; // date1  
+            var d2_ms = today; // date2 
+            var days = Math.ceil(Math.abs(d1_ms - d2_ms) / DAY_MSECONDS); 
+                   
+            </script>
 </head>
 <style>
     .wrap {
@@ -64,11 +70,11 @@
         }
 
         let BOD = $('#datePicker').val();
-        let Result_date = $('#datePicker').val() - today
-        if (BOD == "") {
+        let date_today = today;
+       if (BOD == "") {
             alert("생일을 선택하세요");       
        }
-       else {alert(Result_date)
+       else {alert(days)
        }
     }
     function reset() {
