@@ -14,63 +14,20 @@
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        D_f1 = {
-            0: "아직은 할수 있는게 없어요^^",
-            1: "고개를 움직임,소리에 반응,얼굴을 쳐다봄",
-            2: "울음 외의 소리 냄,물건을 따라 눈 움직임,짧은 시간 동안 머리 들기",
-            3: "웃기,목가누기,엄마얼굴,냄새 기억",
-            4: "목가누기,다리로 자신의 몸무게 버티기(안긴 상태),엄마가 얘기하면 따라서 옹알이",
-            5: "원색을 구분할 수 있음,뒤집기,자기 발과 손 가지고 놀기",
-            6: "목소리 등 소리에 반응,양방향으로 모두 뒤집기",
-            7: "도움없이 앉기,물건 잡아당기기,옹알거림",
-            8: "엄마, 아빠등의 소리를 냄,기기 시작,물건을 이쪽 손에서 저쪽 손으로 옮겨잡음",
-            9: "단어와 비슷한 발음의 의성어,뭔가를 잡고 일어서기",
-            10: "손을 흔들어 작별인사 흉내,엄지와 검지 손가락으로 물건 잡기,잘 기어다님",
-            11: "엄마에게 “엄마”, 아빠에게 “아빠”라고 부름,짝짜꿍 놀이,잠시동안 혼자 서기",
-            12: "타인의 행동 흉내,문장 비슷한 의성어로 종알거림,원하는 것을 행동으로 표현",
-            13: "2개 단어를 제대로 사용,몸굽혀 물건 집기,혼자 서기",
-            14: "손가락으로 음식 집어먹기,용기로부터 물건 꺼내기,다른 사람 흉내",
-            15: "공 가지고 놀기,5개의 단어 사용,뒤로 걷기",
-            16: "책 페이지 잘 넘김,장난감이나 인형 등 좋아하는 물건을 항상 가지고 다니려고 함",
-            17: "다양한 단어사용,병원놀이, 학교놀이 등의 놀이 즐김,장난감차 등 탈 수 있는 장난감 좋아함",
-            18: "책 혼자 읽는 척,낙서",
-        }
-        D_f2 = {
-            0: "초보 부모 두려워말고 힘내세요!!",
-            1: "물건을 따라 눈 움직임,우~, 아~ 소리를 냄,흑백패턴을 볼 수 있음",
-            2: "미소짓기, 웃기,45도 각도로 머리 들기,움직임이 자연스러워 짐",
-            3: "옹알이,엄마목소리 기억,머리와 어깨 한꺼번에 들기",
-            4: "장난감 잡기 위해 손 뻗치기 또는 잡기,뒤집기",
-            5: "새로운 소리나는 쪽으로 고개 돌리기,자기 이름에 반응",
-            6: "물건 입에 집어넣기,도움없이 앉기,이유식 시작",
-            7: "단어와 비슷한 발음의 의성어 표현,앞으로 배밀이 또는 기기 시작",
-            8: "뭔가를 잡고 일어서기,잘 기어다님,물건을 손가락으로 가르킴",
-            9: "엄지와 검지 손가락으로 물건 잡기,뭔가 잡고 서서 여기저기로 옮겨다니기,두개 물건잡고 부딪히기",
-            10: "엄마에게 “엄마”, 아빠에게 “아빠”라고 부름,이름에 반응하고 “안돼”라는 말 이해,원하는 물건을 가리킴",
-            11: "타인의 행동 흉내,물건을 용기에 집어넣기,짧은 문장 이해하기",
-            12: "엄마” “아빠” 외에 1개 단어 사용,몇 걸음 뗌,짧은 문장 이해하고 적절한 반응",
-            13: "거울에 비친 자기모습 좋아하기,컵 사용가능,간단한 숨바꼭질 놀이",
-            14: "아장아장 걷기,간단한 놀이 즐김,“코” 하면 코 가르킴",
-            15: "선 긋기 가능,뛰어다니기",
-            16: "어디든 오르기 좋아함,블록 3개 쌓기,전화 등 일상용품 사용법 배움",
-            17: "'앉아봐' 등의 말을 알아듣고 그대로 실행,말을 보다 명확하게 함",
-            18: "문장을 만들려고 단어 나열,도움받아 이 닦기,블록 4개 이상 쌓기",
-        }
-    </script>
-
 </head>
 <style>
     .wrap {
         margin: auto;
         width: 300px;
     }
+
     .subject {
         margin: auto;
         padding: 5px;
         width: 300px;
         font-size: small;
     }
+
     .img {
         margin-top: 20px;
     }
@@ -130,19 +87,23 @@
 
     }
     function enroll() {
-  
-        
+        <a href="/enroll"></a>
+
     }
-  
+    function is_long(obj) {
+        let content = $(obj).val();
+        if (content.length > 140) {
+            alert('리뷰는 140자까지 기록할 수 있습니다.');
+            $(obj).val(content.substring(0, content.length - 1));
+        }
+    }
+
 </script>
 
 <body>
     <div class="wrap">
-        <div class="img">
-            <img src="{{ url_for('static', filename='logo.png') }}" / width="300" , height="300" onclick="location.href='enroll.html'"
-                id="restart">
-                <button type="button"  class="btn btn-secondary btn-lg btn-block subject" onclick="enroll()">사진 & 일기를 등록</button>
-                   </div>
+        <div> <button type="button" class="btn btn-secondary btn-lg btn-block subject" onclick="enroll()">돌아가기</button>
+        </div>
         <div class="input-group-prepend">
             <span class="input-group-text" id="">우리 아이 이름</span>
             <input type="text" class="form-control" id="name">
@@ -151,24 +112,17 @@
             <span class="input-group-text" id="">우리 아이 생일</span>
             <input type="text" id="datePicker" class="form-control" value="">
         </div>
-        <div class="btn" id="loading">
-            <button type="button" onclick="hey()" class="btn btn-outline-success">Success</button>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">우리아이 일기</span>
+            </div>
+            <textarea class="form-control" aria-describedby="basic-addon3" name="Diary" id="diary_write" cols="30"
+                rows="5" placeholder="날짜와 발달 일기를 적어주세요.                140자까지 입력할 수 있습니다." onkeyup="is_long(this)"></textarea>
         </div>
-
+        <div class="btn" id="loading">
+            <button type="button" onclick="hey()" class="btn btn-outline-success">기록하기</button>
+        </div>
     </div>
-    <div id="result_box">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">개월</th>
-                    <th scope="col">대부분 아기가 할 수 있는 것</th>
-                    <th scope="col">절반의 아기가 할 수 있는 것</th>
-                </tr>
-            </thead>
-            <tbody id="orders-box"></tbody>
-        </table>
-    </div>
-
     <script>
         $(function () {
             $('#datePicker').datepicker({

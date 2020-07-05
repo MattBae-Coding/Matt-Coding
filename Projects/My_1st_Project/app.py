@@ -4,6 +4,9 @@ app = Flask(__name__) #flaks를 사용하겠다는 말
 @app.route('/') #5000 뒤에 붙는것
 def home():
    return render_template('index.html')
+@app.route('/') #5000 뒤에 붙는것
+def enroll():
+   return render_template('enroll.html')
 
 @app.route('/test', methods=['POST'])
 def test_post():
