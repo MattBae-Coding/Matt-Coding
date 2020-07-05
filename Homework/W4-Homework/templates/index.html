@@ -10,7 +10,11 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&family=Oswald&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        dic1 = {1:"테스트1", 2:"테스트2"}
 
+
+    </script>
 </head>
 <style>
     .wrap {
@@ -28,6 +32,7 @@
         background-size: cover;
         border-radius: 10px;
     }
+
     .main_title {
         font-size: 30px;
         font-weight: bold;
@@ -50,6 +55,7 @@
     }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script>
     $(document).ready(function () {
         $.ajax({
@@ -63,7 +69,7 @@
                 listing();
             }
         })
-        
+
     })
 
     function hey() {
@@ -72,15 +78,16 @@
         let qty = $('#qty').val();
         let address = $('#address').val();
         let telephone = $('#telephone').val();
+        let dic = dic1[1];
 
-        
+
         if (name == "") {
-            alert('이름을 입력하세요!');
+            alert(dic);
             return;
-        }   else if (qty == "수량을 선택하세요") {
+        } else if (qty == "수량을 선택하세요") {
             alert('수량을 입력하세요!');
             return;
-        }   else if (address == "") {
+        } else if (address == "") {
             alert('주소을 입력하세요!');
             return;
         }
@@ -90,48 +97,51 @@
             alert("핸드폰 번호를 입력해주세요");
             return;
         }
-        
+
         $.ajax({
             type: "POST",
             url: "/hey",
-            data: {name_give:name,qty_give:qty,address_give:address,telephone_give:telephone},
+            data: { name_give: name, qty_give: qty, address_give: address, telephone_give: telephone },
             success: function (response) {
-                if (response['result'] == 'success'){
-                    alert(response['msg']);};  
-                    window.location.reload();          
-        }})
+                if (response['result'] == 'success') {
+                    alert(response['msg']);
+                };
+                window.location.reload();
+            }
+        })
     }
 
     function listing() {
-    $.ajax({
-    type: "GET",
-    url: "/list",
-    data: {},
-    success: function(response){
-        if (response['result'] == 'success')
-            let = result_order = (response['all_orders'])
-            for (let i = 0; i < result_order.length; i++){
-                let name = result_order[i]['name']
-                let qty = result_order[i]['qty']
-                let address = result_order[i]['address']
-                let telephone = result_order[i]['telephone']
-                let temp_html = `<tr>
+        $.ajax({
+            type: "GET",
+            url: "/list",
+            data: {},
+            success: function (response) {
+                if (response['result'] == 'success')
+                    let = result_order = (response['all_orders'])
+                for (let i = 0; i < result_order.length; i++) {
+                    let name = result_order[i]['name']
+                    let qty = result_order[i]['qty']
+                    let address = result_order[i]['address']
+                    let telephone = result_order[i]['telephone']
+                    let temp_html = `<tr>
                                 <td>${name}</td>
                                 <td>${qty}</td>
                                 <td>${address}</td>
                                 <td>${telephone}</td>
                             </tr>`;
-                $('#orders-box').append(temp_html)
-                          
+                    $('#orders-box').append(temp_html)
+
+                }
             }
-        }
-  })}
+        })
+    }
 </script>
 
 <body>
     <div class="wrap">
         <div class="product_img">
-            <img src="{{ url_for('static', filename='cookie2.jpg') }}"/>
+            <img src="{{ url_for('static', filename='cookie2.jpg') }}" />
         </div>
         <span class="main_title">
             쿠키를 팝니다.

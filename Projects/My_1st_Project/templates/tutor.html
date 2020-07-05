@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,57 +13,27 @@
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        Dic_figures1 = {
-            1:"고개를 움직임,소리에 반응,얼굴을 쳐다봄",
-            2:"울음 외의 소리 냄,물건을 따라 눈 움직임,짧은 시간 동안 머리 들기",
-            3:"웃기,목가누기,엄마얼굴,냄새 기억",
-		    4:"목가누기,다리로 자신의 몸무게 버티기(안긴 상태),엄마가 얘기하면 따라서 옹알이",
-            5:"원색을 구분할 수 있음,뒤집기,자기 발과 손 가지고 놀기",
-            6:"목소리 등 소리에 반응,양방향으로 모두 뒤집기",
-		    7:"도움없이 앉기,물건 잡아당기기,옹알거림",
-            8:"엄마, 아빠등의 소리를 냄,기기 시작,물건을 이쪽 손에서 저쪽 손으로 옮겨잡음",
-            9:"단어와 비슷한 발음의 의성어,뭔가를 잡고 일어서기",
-            10:"손을 흔들어 작별인사 흉내,엄지와 검지 손가락으로 물건 잡기,잘 기어다님",
-            11:"엄마에게 “엄마”, 아빠에게 “아빠”라고 부름,짝짜꿍 놀이,잠시동안 혼자 서기",
-            12:"타인의 행동 흉내,문장 비슷한 의성어로 종알거림,원하는 것을 행동으로 표현",
-            13:"2개 단어를 제대로 사용,몸굽혀 물건 집기,혼자 서기",
-            14:"손가락으로 음식 집어먹기,용기로부터 물건 꺼내기,다른 사람 흉내",
-            15:"공 가지고 놀기,5개의 단어 사용,뒤로 걷기",
-            16:"책 페이지 잘 넘김,장난감이나 인형 등 좋아하는 물건을 항상 가지고 다리려고 함",
-            17:"다양한 단어사용,병원놀이, 학교놀이 등의 놀이 즐김,장난감차 등 탈 수 있는 장난감 좋아함",
-            18:"책 혼자 읽는 척,낙서",
-        }
-    </script>
 </head>
 <style>
     .wrap {
         margin: auto;
         width: 300px;
     }
-
     .subject {
         font-size: small;
         font-style: italic;
         font-weight: bold;
     }
-
     .img {
         margin-top: 20px;
     }
-
     .input-group-prepend {
         margin-top: 30px;
         width: 300px;
     }
-
     .btn {
         margin-top: 10px;
         width: 280px;
-    }
-    .table {
-        margin: auto;
-        width: 1000px;
     }
 </style>
 <script>
@@ -74,31 +43,26 @@
             alert("이름을 입력하세요")
             return
         }
-
         let BOD = $('#datePicker').val();
         // BOD를 date 형식으로 변환
         let year = BOD.split('-')[0];
-        let month = BOD.split('-')[1] - 1;
+        let month = BOD.split('-')[1]-1;
         let date = BOD.split('-')[2];
-        let BOD_date = new Date(year, month, date);
+        let BOD_date = new Date(year,month,date);
         let today = new Date();
         let oneDay = 24 * 60 * 60 * 1000;
         let days = Math.round(Math.abs((today - BOD_date) / oneDay));
-        let result_month = Math.floor(days / 30);
-        if (BOD == "") {
-            alert("생일을 선택하세요");
-        }
-        else {
-            alert(result_month + "개월째 입니다!")
-        }
+       if (BOD == "") {
+            alert("생일을 선택하세요");       
+       }
+       else {
+           alert(days)
+       }
     }
     function reset() {
         window.location.reload()
     }
-
-
 </script>
-
 <body>
     <div class="wrap">
         <div class="img">
@@ -117,20 +81,7 @@
         <div class="btn" id="loading">
             <button type="button" onclick="hey()" class="btn btn-outline-success">Success</button>
         </div>
-        
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">주수</th>
-                <th scope="col">대개의아기가 할 수 있는 것</th>
-                <th scope="col">절반의 아기가 할 수 있는 것</th>
-                <th scope="col">소수의 아기가 할 수 있는 것</th>
-            </tr>
-        </thead>
-        <tbody id="orders-box"></tbody>
-    </table>
-
     <script>
         $(function () {
             $('#datePicker').datepicker({
@@ -159,9 +110,6 @@
                 language: "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
             });//datepicker end
         });//ready end
-
     </script>
-
 </body>
-
 </html>
