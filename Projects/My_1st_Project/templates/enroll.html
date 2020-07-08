@@ -51,44 +51,26 @@
 
     function hey() {
         let name = $('#name').val();
+        let BOD = $('#datePicker').val();
+
         if (name == "") {
             alert("이름을 입력하세요")
-            return
-        }
-
-        let BOD = $('#datePicker').val();
-        // BOD를 date 형식으로 변환
-        let year = BOD.split('-')[0];
-        let month = BOD.split('-')[1] - 1;
-        let date = BOD.split('-')[2];
-        let BOD_date = new Date(year, month, date);
-        let today = new Date();
-        let oneDay = 24 * 60 * 60 * 1000;
-        let days = Math.round(Math.abs((today - BOD_date) / oneDay));
-        let result_month = Math.floor(days / 30);
-        let text_R = print[D_f1]
-        let result_text = D_f1[result_month];
-        let text_R2 = print[D_f2]
-        let result_text2 = D_f2[result_month];
-        if (BOD == "") {
+        }   else if (BOD == "") {
             alert("생일을 선택하세요");
-        }
-        let result_html = `<div id="result_box"><table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">${result_month}개월</th>
-                                        <th scope="col">${result_text}</th>
-                                        <th scope="col">${result_text2}</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="orders-box"></tbody>
-                            </table><div>`
-        $('#result_box').append(result_html);
+        } else {  
+            $.ajax({
+                type: "POST",
+                url: "/save",
+                data: {},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert(response['msg'])
+                    }}
+                });}}
 
-    }
-    function enroll() {
-        <a href="/enroll"></a>
-
+            
+    function return_main() {
+        location.href = "/"
     }
     function is_long(obj) {
         let content = $(obj).val();
@@ -102,7 +84,8 @@
 
 <body>
     <div class="wrap">
-        <div> <button type="button" class="btn btn-secondary btn-lg btn-block subject" onclick="enroll()">돌아가기</button>
+        <div> <button type="button" class="btn btn-secondary btn-lg btn-block subject"
+                onclick="return_main()">돌아가기</button>
         </div>
         <div class="input-group-prepend">
             <span class="input-group-text" id="">우리 아이 이름</span>
@@ -117,7 +100,8 @@
                 <span class="input-group-text">우리아이 일기</span>
             </div>
             <textarea class="form-control" aria-describedby="basic-addon3" name="Diary" id="diary_write" cols="30"
-                rows="5" placeholder="날짜와 발달 일기를 적어주세요.                140자까지 입력할 수 있습니다." onkeyup="is_long(this)"></textarea>
+                rows="5" placeholder="날짜와 발달 일기를 적어주세요.                140자까지 입력할 수 있습니다."
+                onkeyup="is_long(this)"></textarea>
         </div>
         <div class="btn" id="loading">
             <button type="button" onclick="hey()" class="btn btn-outline-success">기록하기</button>
