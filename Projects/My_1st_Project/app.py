@@ -1,5 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__) #flaks를 사용하겠다는 말
+
+from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
+client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
+db = client.dbsparta                      # 'dbsparta'라는 이름의 db를 만듭니다.
+
 #HTML
 @app.route('/') #5000 뒤에 붙는것
 def home():
@@ -12,13 +17,24 @@ def enroll():
 #API
 @app.route('/save', methods=['POST'])
 def save():
-   return jsonify({'result':'success', 'msg': '저장완료'})
+   name_get = request.form['name_give']
+   dob_get = request.form['dob_give']
+   diary_get = request.form['diary_give']
 
-@app.route('/test', methods=['GET'])
-def test_get():
-   title_receive = request.args.get('title_give')
-   print(title_receive)
-   return jsonify({'result':'success', 'msg': '이 요청은 GET!'})
+   doc = {
+      'name':name_get,
+      'dob':dob_get,
+      'diary':diary_get
+   }
+   db.myproject.insert_one(doc)
+   return jsonify({'result':'success', 'msg': '저장완료!!'})
+
+@app.route('/show', methods=['GET'])
+def show():
+   name_get = request.form['name_give']
+   dob_get = request.form['dob_give']
+   diarys = list(db.myproject.find({name_get:name,dob_get:dob},{'_id':0}))
+   return jsonify({'result':'success', 'all_diary':diarys})
 
 
 #flaks를 돌려주는 친구 - 계속 돌아감 

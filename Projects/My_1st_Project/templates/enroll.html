@@ -48,10 +48,10 @@
     }
 </style>
 <script>
-
     function hey() {
         let name = $('#name').val();
         let BOD = $('#datePicker').val();
+        let diary = $('#diary_write').val();
 
         if (name == "") {
             alert("이름을 입력하세요")
@@ -61,14 +61,12 @@
             $.ajax({
                 type: "POST",
                 url: "/save",
-                data: {},
+                data: {name_give:name,dob_give:BOD,diary_give:diary},
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert(response['msg'])
                     }}
-                });}}
-
-            
+                });}}         
     function return_main() {
         location.href = "/"
     }
