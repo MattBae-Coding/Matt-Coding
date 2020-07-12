@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <meta property="og:title" content="우리 아이 오늘은?" />
+    <meta property="og:description" content="우리 아이 발달 확인하고 일기쓰기!" />
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -89,8 +92,9 @@
 
     .table {
         margin: auto;
-        width: 800px;
+        width: 1000px;
     }
+
 </style>
 <script>
 
@@ -101,7 +105,6 @@
             alert("이름을 입력하세요")
             return
         }
-
         let BOD = $('#datePicker').val();
         // BOD를 date 형식으로 변환
         let year = BOD.split('-')[0];
@@ -123,7 +126,7 @@
                              <table class="table">
                                  <thead>
                                  <tr>
-                            <th scope="col">개월</th>
+                            <th scope="col">현재개월</th>
                             <th scope="col">대부분 아기가 할 수 있는 것</th>
                             <th scope="col">절반의 아기가 할 수 있는 것</th>
                         </tr>
@@ -141,21 +144,39 @@
                 </table><div>`
         $('#result_box').append(result_html);
 
+        listing()
 
-        $.ajax({
-            type: "GET",
-            url: "/show",
-            data: {},
-            success: function (response) {
-                if (response['result'] == 'success') {
-                    let diarys = response['all_diary']
-                    console.log(order)
-
-                }
-            }
-        });
     }
 
+    function listing() {
+        let name = $('#name').val();
+        let BOD = $('#datePicker').val();
+        let diary = $('#diary_write').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/show",
+            data: { name_give: name, dob_give: BOD, diary_give: diary },
+            success: function (response) {
+                if (response['result'] == 'success') {
+                    let diarys = response['all_diarys']
+                    for (let i = 0; i < diarys.length; i++){
+                        let Result_DD = diarys[i]['diary']
+                    let diary_html = `<div id="diary_box"><table class="table">
+                                        <thead>
+                                        <tr>
+                                        <th scope="col">우리 아이 일기</th>
+                                        <th scope="col">${Result_DD}</th>
+                                        </tr>
+                                        </thead>
+                                        </table>
+                                    <div>`
+                    $('#diary_box').append(diary_html);
+                    }
+                    }
+            }
+        })
+    }
 
     function enroll() {
         location.href = "/enroll"
@@ -167,8 +188,8 @@
     <div class="wrap">
         <div class="img">
             <img src="{{ url_for('static', filename='logo.png') }}" / width="300" , height="300">
-            <button type="button" class="btn btn-secondary btn-lg btn-block subject" onclick="enroll()">사진 & 일기를
-                등록</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block subject" onclick="enroll()">일기를
+                작성하세요!</button>
         </div>
         <div class="input-group-prepend">
             <span class="input-group-text" id="">우리 아이 이름</span>
@@ -187,9 +208,19 @@
         <!-- <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">개월</th>
+                    <th scope="col">현재개월</th>
                     <th scope="col">대부분 아기가 할 수 있는 것</th>
                     <th scope="col">절반의 아기가 할 수 있는 것</th>
+                </tr>
+            </thead>
+            <div id="orders-box"></div>
+        </table> -->
+    </div>
+    <div id="diary_box">
+        <!-- <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">우리아이 일기</th>
                 </tr>
             </thead>
             <div id="orders-box"></div>
